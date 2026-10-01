@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Campus Events</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .section-title {
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    .event {
+      background: white;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .event h3 {
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    .event p {
+      margin: 6px 0;
+      color: #4b5563;
+    }
+
+    .date {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1d4ed8;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🎓 Campus Events</h1>
+    <p>College Event & Academic Schedule</p>
+  </header>
+
+  <main class="container">
+
+    <h2 class="section-title">📅 Upcoming Events</h2>
+
+    <div class="event">
+      <span class="date">October 10, 2026</span>
+      <h3>Opening Ceremony</h3>
+      <p>🕘 Time: 9:00 AM</p>
+      <p>📍 Venue: Main Auditorium</p>
+      <p>🎤 Speaker: College Principal</p>
+    </div>
+
+    <div class="event">
+      <span class="date">October 10, 2026</span>
+      <h3>Guest Lecture</h3>
+      <p>🕚 Time: 11:00 AM</p>
+      <p>📍 Venue: Seminar Hall</p>
+      <p>🎤 Speaker: Guest Professor</p>
+    </div>
+
+    <div class="event">
+      <span class="date">October 11, 2026</span>
+      <h3>Technical Workshop</h3>
+      <p>🕙 Time: 10:00 AM</p>
+      <p>📍 Venue: Computer Lab</p>
+      <p>🎤 Speaker: Industry Expert</p>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 Campus Events
+  </footer>
+
+</body>
+</html>
+
