@@ -20,9 +20,9 @@
     }
 
     header {
-      background: #2563eb;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
       color: white;
-      padding: 25px 20px;
+      padding: 30px 20px;
       text-align: center;
     }
 
@@ -48,19 +48,19 @@
 
     .event {
       background: white;
-      border-radius: 12px;
-      padding: 18px;
+      border-radius: 14px;
+      padding: 20px;
       margin-bottom: 15px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .event h3 {
       color: #2563eb;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .event p {
-      margin: 6px 0;
+      margin: 7px 0;
       color: #4b5563;
     }
 
@@ -68,15 +68,30 @@
       display: inline-block;
       background: #dbeafe;
       color: #1d4ed8;
-      padding: 5px 10px;
+      padding: 6px 12px;
       border-radius: 20px;
       font-size: 13px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    #loading {
+      text-align: center;
+      padding: 30px;
+      color: #6b7280;
+    }
+
+    #error {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 15px;
+      border-radius: 10px;
+      display: none;
+      margin-bottom: 20px;
     }
 
     footer {
       text-align: center;
-      padding: 25px;
+      padding: 30px;
       color: #6b7280;
       font-size: 14px;
     }
@@ -94,35 +109,132 @@
 
     <h2 class="section-title">📅 Upcoming Events</h2>
 
-    <div class="event">
-      <span class="date">October 10, 2026</span>
-      <h3>Opening Ceremony</h3>
-      <p>🕘 Time: 9:00 AM</p>
-      <p>📍 Venue: Main Auditorium</p>
-      <p>🎤 Speaker: College Principal</p>
+    <div id="error"></div>
+
+    <div id="loading">
+      Loading events...
     </div>
 
-    <div class="event">
-      <span class="date">October 10, 2026</span>
-      <h3>Guest Lecture</h3>
-      <p>🕚 Time: 11:00 AM</p>
-      <p>📍 Venue: Seminar Hall</p>
-      <p>🎤 Speaker: Guest Professor</p>
-    </div>
-
-    <div class="event">
-      <span class="date">October 11, 2026</span>
-      <h3>Technical Workshop</h3>
-      <p>🕙 Time: 10:00 AM</p>
-      <p>📍 Venue: Computer Lab</p>
-      <p>🎤 Speaker: Industry Expert</p>
-    </div>
+    <div id="events"></div>
 
   </main>
 
   <footer>
     © 2026 Campus Events
   </footer>
+
+  <script type="module">
+
+    // Firebase configuration
+    // Replace the values below with your Firebase values.
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDGDgY_HYNIOxWm1OkmE0CxV8LTqBmukz8",
+  authDomain: "campus-events-b73a9.firebaseapp.com",
+  projectId: "campus-events-b73a9",
+  storageBucket: "campus-events-b73a9.firebasestorage.app",
+  messagingSenderId: "373482609018",
+  appId: "1:373482609018:web:47bd70f9687aac01e75ec3",
+  
+};
+
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+
+    import {
+      getFirestore,
+      collection,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+
+    const db = getFirestore(app);
+
+    async function loadEvents() {
+
+      const loading = document.getElementById("loading");
+      const eventsContainer = document.getElementById("events");
+      const error = document.getElementById("error");
+
+      try {
+
+        const snapshot = await getDocs(
+          collection(db, "events")
+        );
+
+        loading.style.display = "none";
+
+        if (snapshot.empty) {
+
+          eventsContainer.innerHTML = `
+            <div class="event">
+              <h3>No events available</h3>
+              <p>There are currently no scheduled events.</p>
+            </div>
+          `;
+
+          return;
+        }
+
+        snapshot.forEach((doc) => {
+
+          const event = doc.data();
+
+          const eventCard = document.createElement("div");
+
+          eventCard.className = "event";
+
+          eventCard.innerHTML = `
+            <span class="date">
+              ${event.date || "Date not available"}
+            </span>
+
+            <h3>
+              ${event.eventName || "Campus Event"}
+            </h3>
+
+            <p>
+              🕘 ${event.startTime || ""}
+              ${event.endTime ? " - " + event.endTime : ""}
+            </p>
+
+            <p>
+              📍 ${event.venue || "Venue not available"}
+            </p>
+
+            <p>
+              🎤 ${event.speaker || "Speaker not specified"}
+            </p>
+
+            <p>
+              📝 ${event.description || ""}
+            </p>
+          `;
+
+          eventsContainer.appendChild(eventCard);
+
+        });
+
+      } catch (err) {
+
+        console.error(err);
+
+        loading.style.display = "none";
+
+        error.style.display = "block";
+
+        error.textContent =
+          "Unable to load events. Please try again later.";
+
+      }
+
+    }
+
+    loadEvents();
+
+  </script>
 
 </body>
 </html>
