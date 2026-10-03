@@ -265,6 +265,17 @@ const auth = getAuth(app);
 
     loadEvents();
 
+  const showAdminLogin = document.getElementById("show-admin-login");
+  const adminLogin = document.getElementById("admin-login");
+
+  showAdminLogin.addEventListener("click", () => {
+    if (adminLogin.style.display === "none") {
+      adminLogin.style.display = "block";
+    } else {
+      adminLogin.style.display = "none";
+    }
+  });
+
   </script>
 
 </body>
