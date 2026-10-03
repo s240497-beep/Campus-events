@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Campus Events</title>
-  
+
   <style>
     * {
       box-sizing: border-box;
@@ -33,6 +33,72 @@
 
     header p {
       font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px;
+    }
+
+    #show-admin-login {
+      background: white;
+      color: #2563eb;
+    }
+
+    #admin-login {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    #admin-login h2 {
+      margin-bottom: 15px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 11px;
+      margin: 7px 0;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    #admin-login-btn,
+    #add-event-btn {
+      background: #2563eb;
+      color: white;
+    }
+
+    #logout-btn {
+      background: #dc2626;
+      color: white;
+    }
+
+    #admin-dashboard {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    #admin-dashboard h2 {
+      margin-bottom: 15px;
+      color: #1f2937;
     }
 
     .container {
@@ -89,11 +155,31 @@
       margin-bottom: 20px;
     }
 
+    #login-message,
+    #admin-message {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
     footer {
       text-align: center;
       padding: 30px;
       color: #6b7280;
       font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 25px;
+      }
+
+      .container {
+        padding: 0 12px;
+      }
+
+      #admin-login {
+        margin: 15px 12px;
+      }
     }
   </style>
 </head>
@@ -103,61 +189,110 @@
   <header>
     <h1>🎓 Campus Events</h1>
     <p>College Event & Academic Schedule</p>
-    <button id="show-admin-login">Admin Login </button>
-
+    <button id="show-admin-login">Admin Login</button>
   </header>
 
+
+  <!-- ========================= -->
+  <!-- ADMIN LOGIN -->
+  <!-- ========================= -->
+
   <section id="admin-login" style="display: none;">
-  <h2>Admin Login</h2>
 
-  <input
-    type="email"
-    id="admin-email"
-    placeholder="Admin email"
-  />
+    <h2>Admin Login</h2>
 
-  <input
-    type="password"
-    id="admin-password"
-    placeholder="Password"
-  />
+    <input
+      type="email"
+      id="admin-email"
+      placeholder="Admin email"
+    >
 
-  <button id="admin-login-btn">Login</button>
+    <input
+      type="password"
+      id="admin-password"
+      placeholder="Password"
+    >
 
-  <p id="login-message"></p>
+    <button id="admin-login-btn">
+      Login
+    </button>
+
+    <p id="login-message"></p>
+
+
+    <!-- ========================= -->
+    <!-- ADMIN DASHBOARD -->
+    <!-- ========================= -->
+
     <div id="admin-dashboard" style="display: none;">
 
-  <h2>⚙️ Admin Dashboard</h2>
+      <h2>⚙️ Admin Dashboard</h2>
 
-  <input type="text" id="event-name" placeholder="Event name">
+      <input
+        type="text"
+        id="event-name"
+        placeholder="Event name"
+      >
 
-  <input type="text" id="event-date" placeholder="Date">
+      <input
+        type="text"
+        id="event-date"
+        placeholder="Date"
+      >
 
-  <input type="text" id="event-start" placeholder="Start time">
+      <input
+        type="text"
+        id="event-start"
+        placeholder="Start time"
+      >
 
-  <input type="text" id="event-end" placeholder="End time">
+      <input
+        type="text"
+        id="event-end"
+        placeholder="End time"
+      >
 
-  <input type="text" id="event-venue" placeholder="Venue">
+      <input
+        type="text"
+        id="event-venue"
+        placeholder="Venue"
+      >
 
-  <input type="text" id="event-speaker" placeholder="Speaker">
+      <input
+        type="text"
+        id="event-speaker"
+        placeholder="Speaker"
+      >
 
-  <textarea
-    id="event-description"
-    placeholder="Event description"
-  ></textarea>
+      <textarea
+        id="event-description"
+        placeholder="Event description"
+      ></textarea>
 
-  <button id="add-event-btn">Add Event</button>
+      <button id="add-event-btn">
+        Add Event
+      </button>
 
-  <button id="logout-btn">Logout</button>
+      <button id="logout-btn">
+        Logout
+      </button>
 
-  <p id="admin-message"></p>
+      <p id="admin-message"></p>
 
-</div>
-</section>
+    </div>
+
+  </section>
+
+
+  <!-- ========================= -->
+  <!-- PUBLIC EVENTS -->
+  <!-- ========================= -->
 
   <main class="container">
 
-    <h2 class="section-title">🗓️ Upcoming Events</h2>
+    <h2 class="section-title">
+      🗓️ Upcoming Events
+    </h2>
 
     <div id="error"></div>
 
@@ -169,16 +304,22 @@
 
   </main>
 
+
   <footer>
     © 2026 Campus Events
   </footer>
 
+
+  <!-- ========================= -->
+  <!-- FIREBASE / JAVASCRIPT -->
+  <!-- ========================= -->
+
   <script type="module">
 
-    // Firebase configuration
-    // Replace the values below with your Firebase values.
-
-const firebaseConfig = {
+    // =========================
+    // FIREBASE CONFIGURATION
+    // =========================
+    const firebaseConfig = {
   apiKey: "AIzaSyDGDgY_HYNIOxWm1OkmE0CxV8LTqBmukz8",
   authDomain: "campus-events-b73a9.firebaseapp.com",
   projectId: "campus-events-b73a9",
@@ -187,28 +328,58 @@ const firebaseConfig = {
   appId: "1:373482609018:web:47bd70f9687aac01e75ec3",
   
 };
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+    // =========================
+    // FIREBASE IMPORTS
+    // =========================
 
-import {
-  getFirestore,
-  collection,
-  getDocs
-  addDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
-import {
-  getAuth,
-  signInWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+    import {
+      getFirestore,
+      collection,
+      getDocs,
+      addDoc
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+    // =========================
+    // INITIALIZE FIREBASE
+    // =========================
+
+    const app = initializeApp(firebaseConfig);
+
+    const db = getFirestore(app);
+
+    const auth = getAuth(app);
+
+
+    // =========================
+    // LOAD EVENTS
+    // =========================
 
     async function loadEvents() {
 
-      const loading = document.getElementById("loading");
-      const eventsContainer = document.getElementById("events");
-      const error = document.getElementById("error");
+      const loading =
+        document.getElementById("loading");
+
+      const eventsContainer =
+        document.getElementById("events");
+
+      const error =
+        document.getElementById("error");
+
+
+      loading.style.display = "block";
+      error.style.display = "none";
+
 
       try {
 
@@ -216,29 +387,40 @@ const auth = getAuth(app);
           collection(db, "Events")
         );
 
+
         loading.style.display = "none";
+
+        eventsContainer.innerHTML = "";
+
 
         if (snapshot.empty) {
 
           eventsContainer.innerHTML = `
             <div class="event">
               <h3>No events available</h3>
-              <p>There are currently no scheduled events.</p>
+              <p>
+                There are currently no scheduled events.
+              </p>
             </div>
           `;
 
           return;
         }
 
+
         snapshot.forEach((doc) => {
 
           const event = doc.data();
 
-          const eventCard = document.createElement("div");
+
+          const eventCard =
+            document.createElement("div");
 
           eventCard.className = "event";
 
+
           eventCard.innerHTML = `
+
             <span class="date">
               ${event.date || "Date not available"}
             </span>
@@ -248,8 +430,10 @@ const auth = getAuth(app);
             </h3>
 
             <p>
-              🕘 ${event.startTime || ""}
-              ${event.endTime ? " - " + event.endTime : ""}
+              🕘 ${event.startTime || "Time not specified"}
+              ${event.endTime
+                ? " - " + event.endTime
+                : ""}
             </p>
 
             <p>
@@ -263,143 +447,291 @@ const auth = getAuth(app);
             <p>
               📝 ${event.description || ""}
             </p>
+
           `;
+
 
           eventsContainer.appendChild(eventCard);
 
         });
 
+
       } catch (err) {
 
-        console.error(err);
+        console.error("Load events error:", err);
+
 
         loading.style.display = "none";
 
         error.style.display = "block";
 
         error.textContent =
-          "Unable to load events. Please try again later.";
+          "Unable to load events. Please check Firebase settings.";
 
       }
 
     }
 
+
+    // Load events when page opens
     loadEvents();
 
-  const showAdminLogin = document.getElementById("show-admin-login");
-  const adminLogin = document.getElementById("admin-login");
 
-  showAdminLogin.addEventListener("click", () => {
-    if (adminLogin.style.display === "none") {
-      adminLogin.style.display = "block";
-    } else {
-      adminLogin.style.display = "none";
-    }
-  });
-const adminLoginBtn = document.getElementById("admin-login-btn");
-const adminEmail = document.getElementById("admin-email");
-const adminPassword = document.getElementById("admin-password");
-const loginMessage = document.getElementById("login-message");
 
-adminLoginBtn.addEventListener("click", async () => {
+    // =========================
+    // SHOW / HIDE ADMIN LOGIN
+    // =========================
 
-  const email = adminEmail.value;
-  const password = adminPassword.value;
+    const showAdminLogin =
+      document.getElementById("show-admin-login");
 
-  if (!email || !password) {
-    loginMessage.textContent = "Please enter email and password.";
-    loginMessage.style.color = "red";
-    
-    return;
-  }
+    const adminLogin =
+      document.getElementById("admin-login");
 
-  try {
 
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    showAdminLogin.addEventListener("click", () => {
 
-    loginMessage.textContent = "Login successful!";
-    loginMessage.style.color = "green";
-    document.getElementById("admin-dashboard").style.display = "block";
-    console.log("Admin logged in:", userCredential.user);
+      if (adminLogin.style.display === "none") {
 
-  } catch (error) {
+        adminLogin.style.display = "block";
 
-    console.error(error);
+      } else {
 
-    loginMessage.textContent =
-      "Login failed. Please check your email and password.";
+        adminLogin.style.display = "none";
 
-    loginMessage.style.color = "red";
-  }
+      }
 
-});
-const addEventBtn = document.getElementById("add-event-btn");
-
-addEventBtn.addEventListener("click", async () => {
-
-  const eventName = document.getElementById("event-name").value.trim();
-  const date = document.getElementById("event-date").value.trim();
-  const startTime = document.getElementById("event-start").value.trim();
-  const endTime = document.getElementById("event-end").value.trim();
-  const venue = document.getElementById("event-venue").value.trim();
-  const speaker = document.getElementById("event-speaker").value.trim();
-  const description = document.getElementById("event-description").value.trim();
-
-  const adminMessage = document.getElementById("admin-message");
-
-  if (!eventName || !date || !venue) {
-    adminMessage.textContent =
-      "Please enter Event Name, Date, and Venue.";
-
-    adminMessage.style.color = "red";
-    return;
-  }
-
-  try {
-
-    await addDoc(collection(db, "Events"), {
-      eventName: eventName,
-      date: date,
-      startTime: startTime,
-      endTime: endTime,
-      venue: venue,
-      speaker: speaker,
-      description: description
     });
 
-    adminMessage.textContent = "Event added successfully!";
-    adminMessage.style.color = "green";
 
-    document.getElementById("event-name").value = "";
-    document.getElementById("event-date").value = "";
-    document.getElementById("event-start").value = "";
-    document.getElementById("event-end").value = "";
-    document.getElementById("event-venue").value = "";
-    document.getElementById("event-speaker").value = "";
-    document.getElementById("event-description").value = "";
 
-    document.getElementById("events").innerHTML = "";
+    // =========================
+    // ADMIN LOGIN
+    // =========================
 
-    await loadEvents();
+    const adminLoginBtn =
+      document.getElementById("admin-login-btn");
 
-  } catch (error) {
+    const adminEmail =
+      document.getElementById("admin-email");
 
-    console.error(error);
+    const adminPassword =
+      document.getElementById("admin-password");
 
-    adminMessage.textContent =
-      "Unable to add event. Please try again.";
+    const loginMessage =
+      document.getElementById("login-message");
 
-    adminMessage.style.color = "red";
-  }
+    const adminDashboard =
+      document.getElementById("admin-dashboard");
 
-});
+
+    adminLoginBtn.addEventListener(
+      "click",
+      async () => {
+
+        const email =
+          adminEmail.value.trim();
+
+        const password =
+          adminPassword.value;
+
+
+        if (!email || !password) {
+
+          loginMessage.textContent =
+            "Please enter email and password.";
+
+          loginMessage.style.color = "red";
+
+          return;
+        }
+
+
+        try {
+
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+          loginMessage.textContent =
+            "Login successful!";
+
+          loginMessage.style.color = "green";
+
+
+          adminDashboard.style.display =
+            "block";
+
+
+          adminEmail.value = "";
+          adminPassword.value = "";
+
+
+        } catch (error) {
+
+          console.error("Login error:", error);
+
+
+          loginMessage.textContent =
+            "Login failed. Please check your email and password.";
+
+          loginMessage.style.color = "red";
+
+        }
+
+      }
+    );
+
+
+
+    // =========================
+    // ADD EVENT
+    // =========================
+
+    const addEventBtn =
+      document.getElementById("add-event-btn");
+
+    const adminMessage =
+      document.getElementById("admin-message");
+
+
+    addEventBtn.addEventListener(
+      "click",
+      async () => {
+
+        const eventName =
+          document.getElementById("event-name")
+          .value.trim();
+
+        const date =
+          document.getElementById("event-date")
+          .value.trim();
+
+        const startTime =
+          document.getElementById("event-start")
+          .value.trim();
+
+        const endTime =
+          document.getElementById("event-end")
+          .value.trim();
+
+        const venue =
+          document.getElementById("event-venue")
+          .value.trim();
+
+        const speaker =
+          document.getElementById("event-speaker")
+          .value.trim();
+
+        const description =
+          document.getElementById("event-description")
+          .value.trim();
+
+
+        if (!eventName || !date || !venue) {
+
+          adminMessage.textContent =
+            "Please enter Event Name, Date, and Venue.";
+
+          adminMessage.style.color = "red";
+
+          return;
+        }
+
+
+        try {
+
+          await addDoc(
+            collection(db, "Events"),
+            {
+              eventName: eventName,
+              date: date,
+              startTime: startTime,
+              endTime: endTime,
+              venue: venue,
+              speaker: speaker,
+              description: description
+            }
+          );
+
+
+          adminMessage.textContent =
+            "Event added successfully!";
+
+          adminMessage.style.color = "green";
+
+
+          // Clear fields
+          document.getElementById("event-name").value = "";
+          document.getElementById("event-date").value = "";
+          document.getElementById("event-start").value = "";
+          document.getElementById("event-end").value = "";
+          document.getElementById("event-venue").value = "";
+          document.getElementById("event-speaker").value = "";
+          document.getElementById("event-description").value = "";
+
+
+          // Refresh public events
+          await loadEvents();
+
+
+        } catch (error) {
+
+          console.error("Add event error:", error);
+
+
+          adminMessage.textContent =
+            "Unable to add event. Check your Firestore rules.";
+
+          adminMessage.style.color = "red";
+
+        }
+
+      }
+    );
+
+
+
+    // =========================
+    // LOGOUT
+    // =========================
+
+    const logoutBtn =
+      document.getElementById("logout-btn");
+
+
+    logoutBtn.addEventListener(
+      "click",
+      async () => {
+
+        try {
+
+          await signOut(auth);
+
+
+          adminDashboard.style.display =
+            "none";
+
+          loginMessage.textContent =
+            "Logged out successfully.";
+
+          loginMessage.style.color =
+            "green";
+
+
+        } catch (error) {
+
+          console.error("Logout error:", error);
+
+        }
+
+      }
+    );
 
   </script>
 
 </body>
 </html>
-
