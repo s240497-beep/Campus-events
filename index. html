@@ -163,7 +163,7 @@ const firebaseConfig = {
 
     import {
       initializeApp
-    } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+    } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js ";
 
     import {
       getFirestore,
