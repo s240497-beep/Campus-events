@@ -147,10 +147,18 @@ const firebaseConfig = {
       collection,
       getDocs
     } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/.../firebase-auth.js";
 
     const app = initializeApp(firebaseConfig);
 
     const db = getFirestore(app);
+const auth = getAuth(app);
+
 
     async function loadEvents() {
 
