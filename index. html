@@ -276,6 +276,47 @@ const auth = getAuth(app);
       adminLogin.style.display = "none";
     }
   });
+const adminLoginBtn = document.getElementById("admin-login-btn");
+const adminEmail = document.getElementById("admin-email");
+const adminPassword = document.getElementById("admin-password");
+const loginMessage = document.getElementById("login-message");
+
+adminLoginBtn.addEventListener("click", async () => {
+
+  const email = adminEmail.value;
+  const password = adminPassword.value;
+
+  if (!email || !password) {
+    loginMessage.textContent = "Please enter email and password.";
+    loginMessage.style.color = "red";
+    return;
+  }
+
+  try {
+
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    loginMessage.textContent = "Login successful!";
+    loginMessage.style.color = "green";
+
+    console.log("Admin logged in:", userCredential.user);
+
+  } catch (error) {
+
+    console.error(error);
+
+    loginMessage.textContent =
+      "Login failed. Please check your email and password.";
+
+    loginMessage.style.color = "red";
+  }
+
+});
+
 
   </script>
 
