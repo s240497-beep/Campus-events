@@ -103,7 +103,10 @@
   <header>
     <h1>🎓 Campus Events</h1>
     <p>College Event & Academic Schedule</p>
+    <button id="show-admin-login">Admin Login </button>
+
   </header>
+
   <section id="admin-login" style="display: none;">
   <h2>Admin Login</h2>
 
