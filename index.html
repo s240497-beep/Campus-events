@@ -125,8 +125,35 @@
   <button id="admin-login-btn">Login</button>
 
   <p id="login-message"></p>
-</section>
+    <div id="admin-dashboard" style="display: none;">
 
+  <h2>⚙️ Admin Dashboard</h2>
+
+  <input type="text" id="event-name" placeholder="Event name">
+
+  <input type="text" id="event-date" placeholder="Date">
+
+  <input type="text" id="event-start" placeholder="Start time">
+
+  <input type="text" id="event-end" placeholder="End time">
+
+  <input type="text" id="event-venue" placeholder="Venue">
+
+  <input type="text" id="event-speaker" placeholder="Speaker">
+
+  <textarea
+    id="event-description"
+    placeholder="Event description"
+  ></textarea>
+
+  <button id="add-event-btn">Add Event</button>
+
+  <button id="logout-btn">Logout</button>
+
+  <p id="admin-message"></p>
+
+</div>
+</section>
 
   <main class="container">
 
@@ -282,6 +309,7 @@ adminLoginBtn.addEventListener("click", async () => {
   if (!email || !password) {
     loginMessage.textContent = "Please enter email and password.";
     loginMessage.style.color = "red";
+    
     return;
   }
 
@@ -295,7 +323,7 @@ adminLoginBtn.addEventListener("click", async () => {
 
     loginMessage.textContent = "Login successful!";
     loginMessage.style.color = "green";
-
+    document.getElementById("admin-dashboard").style.display = "block";
     console.log("Admin logged in:", userCredential.user);
 
   } catch (error) {
