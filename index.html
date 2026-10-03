@@ -186,7 +186,7 @@ const auth = getAuth(app);
       try {
 
         const snapshot = await getDocs(
-          collection(db, "events")
+          collection(db, "Events")
         );
 
         loading.style.display = "none";
