@@ -193,6 +193,7 @@ import {
   getFirestore,
   collection,
   getDocs
+  addDoc
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 import {
@@ -337,7 +338,66 @@ adminLoginBtn.addEventListener("click", async () => {
   }
 
 });
+const addEventBtn = document.getElementById("add-event-btn");
 
+addEventBtn.addEventListener("click", async () => {
+
+  const eventName = document.getElementById("event-name").value.trim();
+  const date = document.getElementById("event-date").value.trim();
+  const startTime = document.getElementById("event-start").value.trim();
+  const endTime = document.getElementById("event-end").value.trim();
+  const venue = document.getElementById("event-venue").value.trim();
+  const speaker = document.getElementById("event-speaker").value.trim();
+  const description = document.getElementById("event-description").value.trim();
+
+  const adminMessage = document.getElementById("admin-message");
+
+  if (!eventName || !date || !venue) {
+    adminMessage.textContent =
+      "Please enter Event Name, Date, and Venue.";
+
+    adminMessage.style.color = "red";
+    return;
+  }
+
+  try {
+
+    await addDoc(collection(db, "Events"), {
+      eventName: eventName,
+      date: date,
+      startTime: startTime,
+      endTime: endTime,
+      venue: venue,
+      speaker: speaker,
+      description: description
+    });
+
+    adminMessage.textContent = "Event added successfully!";
+    adminMessage.style.color = "green";
+
+    document.getElementById("event-name").value = "";
+    document.getElementById("event-date").value = "";
+    document.getElementById("event-start").value = "";
+    document.getElementById("event-end").value = "";
+    document.getElementById("event-venue").value = "";
+    document.getElementById("event-speaker").value = "";
+    document.getElementById("event-description").value = "";
+
+    document.getElementById("events").innerHTML = "";
+
+    await loadEvents();
+
+  } catch (error) {
+
+    console.error(error);
+
+    adminMessage.textContent =
+      "Unable to add event. Please try again.";
+
+    adminMessage.style.color = "red";
+  }
+
+});
 
   </script>
 
