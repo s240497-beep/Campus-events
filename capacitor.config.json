@@ -1,0 +1,8 @@
+{
+  "appId": "com.campusevents.app",
+  "appName": "Campus Events",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
