@@ -339,7 +339,7 @@
     } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
     import {
-      getFirestore,
+      initialiseFirestore,
       collection,
       getDocs,
       addDoc,
@@ -360,7 +360,9 @@
 
     const app = initializeApp(firebaseConfig);
 
-    const db = getFirestore(app);
+    const db = initializeFirestore(app, {
+  experimentalAutoDetectLongPolling: true
+});
 
     const auth = getAuth(app);
 
