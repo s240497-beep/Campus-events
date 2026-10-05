@@ -40,7 +40,7 @@ jobs:
         run: npx cap sync android
         
       - name: Generate Android app icon
-run: npx @capacitor/assets generate --android --iconBackgroundColor "#0B2A6F" --iconBackgroundColorDark "#0B2A6F"
+        run: npx @capacitor/assets generate --android --iconBackgroundColor "#0B2A6F" --iconBackgroundColorDark "#0B2A6F"
       
       - name: Build APK
         working-directory: android
